@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate - Loading...</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: var(--bg-primary);
+        }
+        .certificate-container {
+            max-width: 95%;
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .certificate-title {
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+        .certificate-image {
+            max-width: 100%;
+            max-height: calc(100vh - 150px);
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: var(--shadow-hover);
+            border: 1px solid var(--border-color);
+        }
+        @media (max-width: 768px) {
+            .certificate-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="certificate-container">
+        <h1 class="certificate-title" id="certTitle">Certificate</h1>
+        <img id="certImage" class="certificate-image" src="" alt="Certificate">
+    </div>
+
+    <script>
+        // Certificate mapping
+        const certificates = {
+            'aiibm': {
+                title: 'AI Fundamentals by IBM',
+                image: 'images/AIibm.jpg'
+            },
+            'codewolf': {
+                title: 'CodeWolf 5.0 Competition',
+                image: 'images/codewolf5.0.jpg'
+            },
+            'cybercanvas': {
+                title: 'Cyber Canvas Workshop',
+                image: 'images/cybercanvas.jpg'
+            },
+            'dbms': {
+                title: 'Database Management Systems',
+                image: 'images/dbmsscaler.jpg'
+            },
+            'finance': {
+                title: 'Financial Analysis & Management',
+                image: 'images/finance.jpg'
+            },
+            'javaee': {
+                title: 'Java Enterprise Edition',
+                image: 'images/javaEE.jpg'
+            },
+            'nss': {
+                title: 'National Service Scheme (NSS)',
+                image: 'images/nss.jpg'
+            },
+            'pmp': {
+                title: 'Project Management Professional',
+                image: 'images/PMP.jpg'
+            },
+            'proquest': {
+                title: 'ProQuest Research Methodology',
+                image: 'images/Proquest.jpg'
+            }
+        };
+
+        // Get certificate ID from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const certId = urlParams.get('id');
+
+        if (certId && certificates[certId]) {
+            const cert = certificates[certId];
+            document.title = cert.title + ' - Certificate';
+            document.getElementById('certTitle').textContent = cert.title;
+            document.getElementById('certImage').src = cert.image;
+            document.getElementById('certImage').alt = cert.title;
+        } else {
+            document.getElementById('certTitle').textContent = 'Certificate Not Found';
+        }
+
+        // Load theme from localStorage if available
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.body.classList.remove('light-mode');
+        }
+    </script>
+</body>
+</html>
+
